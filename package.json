@@ -1,0 +1,28 @@
+{
+  "name": "ZhihuDaily-for-Desktop",
+  "version": "0.0.1",
+  "description": "A ZhihuDaily client on Mac OS X, Windows and Linux.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DIYgod/ZhihuDaily-for-Desktop"
+  },
+  "keywords": [
+    "ZhihuDaily",
+    "zhihu",
+    "electron",
+    "知乎"
+  ],
+  "author": "DIYgod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DIYgod/ZhihuDaily-for-Desktop/issues"
+  },
+  "homepage": "https://github.com/DIYgod/ZhihuDaily-for-Desktop#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
