@@ -1,10 +1,12 @@
 {
-  "name": "ZhihuDaily-for-Desktop",
+  "name": "zhihudaily",
+  "productName": "ZhihuDaily for Desktop",
   "version": "0.0.1",
   "description": "A ZhihuDaily client on Mac OS X, Windows and Linux.",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "dev": "electron --debug=5858 main.js"
   },
   "repository": {
     "type": "git",
