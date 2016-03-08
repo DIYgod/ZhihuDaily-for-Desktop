@@ -13,10 +13,10 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         title: '知乎日报',
         // icon: 'icon.png',
-        width: 800,
-        height: 600,
-        minWidth: 600,
-        minHeight: 400,
+        width: 1000,
+        height: 650,
+        minWidth: 1000,
+        minHeight: 650,
         resizable: true,
         center: true,
         show: true,
@@ -32,16 +32,18 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadURL('http://localhost:3000/dist/');
+    mainWindow.loadURL('http://localhost:3000/');  // Todo
 
+    // Open Developer Tool
     mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
 
-    appIcon = new Tray('icon/tray.png');
-    appIcon.setToolTip('This is my application.');
+    // Tray icon
+    // appIcon = new Tray('icon/tray.png');
+    // appIcon.setToolTip('This is my application.');
 
 }
 

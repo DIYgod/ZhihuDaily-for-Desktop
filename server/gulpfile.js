@@ -6,27 +6,23 @@ var concat      = require('gulp-concat');
 var minifyCSS   = require('gulp-minify-css');
 var rename      = require('gulp-rename');
 var browserSync = require('browser-sync').create();
+var babel       = require('gulp-babel');
 
 // Static server
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
             baseDir: './'
-        },
-        startPath: '/dist'
+        }
     });
-});
-
-// Copy html files
-gulp.task('copyHTML', function () {
-    gulp.src('src/*.html')
-        .pipe(gulp.dest('dist'))
-        .pipe(browserSync.stream());
 });
 
 // Build js files
 gulp.task('compressJS', function() {
     gulp.src(['src/js/*.js'])
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .pipe(rename({
             suffix: '.min'
@@ -50,10 +46,9 @@ gulp.task('compressCSS', function() {
 
 // Watch files for changes & recompile
 gulp.task('watch', function () {
-    gulp.watch(['src/*.html'], ['copyHTML']);
-    gulp.watch(['src/js/*.js'], ['compressJS']);
     gulp.watch(['src/css/*.scss'], ['compressCSS']);
+    gulp.watch(['src/js/*.js'], ['compressJS']);
 });
 
 // Default task, running just `gulp` will move font, compress js and scss, start server, watch files.
-gulp.task('default', ['copyHTML', 'compressJS', 'compressCSS', 'browser-sync', 'watch']);
+gulp.task('default', ['compressCSS', 'compressJS', 'browser-sync', 'watch']);
