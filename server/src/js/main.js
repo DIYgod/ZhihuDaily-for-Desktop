@@ -6,7 +6,7 @@ xhr.onreadystatechange = () => {
             latest = JSON.parse(xhr.responseText);
         }
         else {
-            console.log('Request was unsuccessful: ' + xhr.status);
+            console.log('Request for "http://news-at.zhihu.com/api/4/news/latest" was unsuccessful: ' + xhr.status);
         }
     }
 };
