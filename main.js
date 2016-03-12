@@ -13,9 +13,9 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         title: '知乎日报',
         // icon: 'icon.png',
-        width: 1000,
+        width: 970,
         height: 650,
-        minWidth: 1000,
+        minWidth: 970,
         minHeight: 650,
         resizable: true,
         center: true,
@@ -27,8 +27,8 @@ function createWindow() {
             javascript: true,
             plugins: true,
             // nodeIntegration: false,
-            webSecurity: false,
-            preload: __dirname + '/inject-preload.js'
+            webSecurity: false
+            // preload: __dirname + '/inject-preload.js'
         }
     });
 
