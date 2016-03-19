@@ -32,7 +32,7 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadURL('http://localhost:3000/');  // Todo
+    mainWindow.loadURL('file://' + __dirname + '/server/index.html');  // Todo
 
     // Open Developer Tool
     mainWindow.webContents.openDevTools();

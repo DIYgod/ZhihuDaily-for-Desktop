@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #F4F4F4;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+    background-color: #009dd7;
+    position: fixed;
+    top: 0;
+
+    .header-box {
+        position: relative;
+        width: 850px;
+        height: 60px;
+        margin: 0 auto;
+
+        .logo {
+            background: url(../../img/logo.png) no-repeat center;
+            background-size: 105px 35px;
+            width: 105px;
+            height: 60px;
+            display: inline-block;
+            margin: 0 0 0 10px;
+        }
+
+        .nav-wrap {
+            position: absolute;
+            bottom: 14px;
+            display: inline-block;
+
+            .control {
+                display: inline-block;
+                margin-left: 30px;
+                background: #11B0EA;
+                border: 1px solid #008FC3;
+                font-size: 0;
+                border-radius: 4px;
+                vertical-align: middle;
+                cursor: pointer;
+
+                .control-button {
+                    display: inline-block;
+                    height: 13px;
+                    line-height: 13px;
+                    width: 14px;
+                    text-align: center;
+                    color: #B3E5FC;
+                    cursor: pointer;
+
+                    &:first-child {
+                        border-right: 1px solid #008FC3;
+                    }
+
+                    i {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            nav {
+                display: inline-block;
+                font-size: 12px;
+                margin-left: 10px;
+
+                a {
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    width: 850px;
+    margin: auto;
+    margin-top: 80px;
+
+    h2 {
+        font-size: 16px;
+        font-weight: normal;
+        margin: 20px 0 15px 0;
+    }
+
+    .article-list {
+        width: 190px;
+        height: 254px;
+        float: left;
+        margin: 0 30px 20px 0;
+        background: #fff;
+        color: #000;
+        padding: 10px;
+        box-sizing: border-box;
+
+        &:nth-child(4n+1) {
+            margin-right: 0;
+        }
+
+        .article-img {
+            height: 170px;
+            width: 170px;
+        }
+
+        .article-title {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    }
+}
