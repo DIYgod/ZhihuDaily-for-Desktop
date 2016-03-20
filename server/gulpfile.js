@@ -5,22 +5,24 @@ var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
 var minifyCSS   = require('gulp-minify-css');
 var rename      = require('gulp-rename');
-var browserSync = require('browser-sync').create();
+// var browserSync = require('browser-sync').create();
 var babel       = require('gulp-babel');
 
 // Static server
-gulp.task('browser-sync', function() {
-    browserSync.init({
-        server: {
-            baseDir: './'
-        }
-    });
-});
+// gulp.task('browser-sync', function() {
+//     browserSync.init({
+//         server: {
+//             baseDir: './'
+//         }
+//     });
+// });
 
 // Copy lib
 gulp.task('lib', function () {
     gulp.src('node_modules/font-awesome/**')
         .pipe(gulp.dest('dist/lib/font-awesome'));
+    gulp.src('node_modules/director/**')
+        .pipe(gulp.dest('dist/lib/director'));
 });
 
 // Build js files
@@ -33,8 +35,8 @@ gulp.task('compressJS', function() {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('dist/js'))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest('dist/js'));
+        // .pipe(browserSync.stream());
 });
 
 // Build css files
@@ -46,16 +48,16 @@ gulp.task('compressCSS', function() {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('dist/css'))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest('dist/css'));
+        // .pipe(browserSync.stream());
 });
 
 // Watch files for changes & recompile
 gulp.task('watch', function () {
-    gulp.watch('*.html').on('change', browserSync.reload);
+    // gulp.watch('*.html').on('change', browserSync.reload);
     gulp.watch(['src/css/*.scss'], ['compressCSS']);
     gulp.watch(['src/js/*.js'], ['compressJS']);
 });
 
 // Default task, running just `gulp` will move font, compress js and scss, start server, watch files.
-gulp.task('default', ['lib', 'compressCSS', 'compressJS', 'browser-sync', 'watch']);
+gulp.task('default', ['lib', 'compressCSS', 'compressJS', 'watch']);

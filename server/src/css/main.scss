@@ -15,6 +15,7 @@ header {
     background-color: #009dd7;
     position: fixed;
     top: 0;
+    z-index: 1;
 
     .header-box {
         position: relative;
@@ -83,6 +84,14 @@ header {
     margin: auto;
     margin-top: 80px;
 
+    .one-day {
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+    }
+
     h2 {
         font-size: 16px;
         font-weight: normal;
@@ -90,6 +99,7 @@ header {
     }
 
     .article-list {
+        position: relative;
         width: 190px;
         height: 254px;
         float: left;
@@ -113,6 +123,17 @@ header {
         .article-title {
             font-size: 13px;
             margin-top: 10px;
+        }
+
+        .article-like {
+            font-size: 10px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+
+            .fa-heart-o {
+                margin-right: 5px;
+            }
         }
     }
 }

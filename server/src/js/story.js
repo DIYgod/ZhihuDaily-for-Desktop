@@ -1,1 +1,0 @@
-console.log(window.location.search.substr(1).split('=')[1]);

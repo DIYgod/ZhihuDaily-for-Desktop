@@ -1,51 +1,137 @@
-const getNews = (data) => {
-    const xhr = new XMLHttpRequest();
-    let resNews;
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                resNews = JSON.parse(xhr.responseText);
-                addNews(resNews);
-            }
-        }
+// 后退前进按钮
+document.getElementsByClassName('control-button')[0].addEventListener('click', () => {
+    window.history.back();
+});
+
+document.getElementsByClassName('control-button')[1].addEventListener('click', () => {
+    window.history.forward();
+});
+window.globalData = {};
+
+// index路由回调
+const indexR = () => {
+    document.getElementsByClassName('container')[0].innerHTML = '';
+
+    // 解析日期
+    const parseDate = (date) => {
+        return date.slice(4, 6) + '月' + date.slice(6, 8) + '日';
     };
-    if (data) {
-        xhr.open('get', 'http://news-at.zhihu.com/api/4/news/before/' + data, true);
-    }
-    else {
-        xhr.open('get', 'http://news-at.zhihu.com/api/4/news/latest', true);
-    }
-    xhr.send(null);
-};
 
-const addNews = (news) => {
-    let newsHTML = `<div class="one-day ` + news.date + `"><h2>` + news.date + `</h2>`;
-    let resNew;
-    for (let i = 0; i < news.stories.length; i++) {
-        newsHTML += `
-            <a class="article-list" href="story.html?id=` + news.stories[i].id + `">
-                <img class="article-img" src="` +  `img/default.png` + `">
-                <div class="article-title">` + news.stories[i].title + `</div>
-            </a>
-        `
-    }
-    newsHTML += `</div>`;
-    document.getElementsByClassName('container')[0].innerHTML += newsHTML;
-
-    // 替换大图
-    for (let i = 0; i < news.stories.length; i++) {
+    // 获取某一天的文章列表
+    let indexDate;
+    const getNews = (data) => {
         const xhr = new XMLHttpRequest();
+        let resNews;
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
                 if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                    resNew = JSON.parse(xhr.responseText);
-                    document.getElementsByClassName(news.date)[0].getElementsByClassName('article-img')[i].src = resNew.image;
+                    resNews = JSON.parse(xhr.responseText);
+                    data ? addNews(resNews) : addNews(resNews, 'today');
                 }
             }
         };
-        xhr.open('get', 'http://news-at.zhihu.com/api/4/news/' + news.stories[i].id, true);
+        if (data) {
+            xhr.open('get', 'http://news-at.zhihu.com/api/4/news/before/' + data, true);
+        }
+        else {
+            xhr.open('get', 'http://news-at.zhihu.com/api/4/news/latest', true);
+        }
         xhr.send(null);
+    };
+
+    // 添加某一天的文章
+    const addNews = (news, type) => {
+        let newsHTML = `<div class="one-day ` + news.date + `"><h2>` + (type === 'today' ? `今日热闻` : parseDate(news.date)) + `</h2>`;
+        let resNew;
+        for (let i = 0; i < news.stories.length; i++) {
+            newsHTML += `
+            <a class="article-list" href="#story/` + news.stories[i].id + `">
+                <img class="article-img" src="` +  `img/default.png` + `">
+                <div class="article-title">` + news.stories[i].title + `</div>
+                <div class="article-like"><i class="fa fa-heart-o"></i><span class="like-count">0</span></div>
+            </a>
+        `
+        }
+        newsHTML += `</div>`;
+        document.getElementsByClassName('container')[0].innerHTML += newsHTML;
+        indexDate = news.date;
+
+        // 替换大图
+        for (let i = 0; i < news.stories.length; i++) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        resNew = JSON.parse(xhr.responseText);
+                        document.getElementsByClassName(news.date)[0].getElementsByClassName('article-img')[i].src = resNew.image;
+                        saveNews();
+                    }
+                }
+            };
+            xhr.open('get', 'http://news-at.zhihu.com/api/4/news/' + news.stories[i].id, true);
+            xhr.send(null);
+        }
+
+        // 获取赞数
+        for (let i = 0; i < news.stories.length; i++) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        resNew = JSON.parse(xhr.responseText);
+                        document.getElementsByClassName(news.date)[0].getElementsByClassName('like-count')[i].innerHTML = resNew.popularity;
+                        saveNews();
+                    }
+                }
+            };
+            xhr.open('get', 'http://news-at.zhihu.com/api/4/story-extra/' + news.stories[i].id, true);
+            xhr.send(null);
+        }
+    };
+
+    // 保存已加载的文章列表
+    const saveNews = () => {
+        window.globalData.indexDate = indexDate;
+        window.globalData.newsHTML = document.getElementsByClassName('container')[0].innerHTML;
+    };
+
+    // 优先恢复已保存的文章列表
+    if (window.globalData.indexDate && window.globalData.newsHTML) {
+        indexDate = window.globalData.indexDate;
+        document.getElementsByClassName('container')[0].innerHTML = window.globalData.newsHTML;
     }
+    else {
+        getNews();
+    }
+    window.onscroll = () => {
+        if (window.innerHeight + document.body.scrollTop >= document.body.scrollHeight) {
+            getNews(indexDate);
+        }
+    };
 };
 
-getNews();
+const storyR = (storyId) => {
+    window.onscroll = null;
+    const xhr = new XMLHttpRequest();
+    let storyData;
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                document.body.scrollTop = 0;
+                storyData = JSON.parse(xhr.responseText);
+                document.getElementsByClassName('container')[0].innerHTML = storyData.body;
+            }
+        }
+    };
+    xhr.open('get', 'http://news-at.zhihu.com/api/4/news/' + storyId, true);
+    xhr.send(null);
+};
+
+var routes = {
+    '/': indexR,
+    '/story/:storyId': storyR
+};
+
+var router = Router(routes);
+
+router.init('/');
