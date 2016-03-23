@@ -24,7 +24,7 @@ header {
         margin: 0 auto;
 
         .logo {
-            background: url(../../img/logo.png) no-repeat center;
+            background: url(../assets/img/logo.png) no-repeat center;
             background-size: 105px 35px;
             width: 105px;
             height: 60px;
@@ -81,8 +81,7 @@ header {
 
 .container {
     width: 850px;
-    margin: auto;
-    margin-top: 80px;
+    margin: 80px auto auto;
 
     .one-day {
         &:after {
