@@ -32,7 +32,7 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadURL('file://' + __dirname + '/server/index.html');  // Todo
+    mainWindow.loadURL('file://' + __dirname + '/server/dist/index.html');  // Todo
 
     // Open Developer Tool
     mainWindow.webContents.openDevTools();
