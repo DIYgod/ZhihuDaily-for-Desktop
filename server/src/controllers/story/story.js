@@ -1,4 +1,4 @@
-module.exports = (storyId) => {
+export default (storyId) => {
   window.onscroll = null;
   const xhr = new XMLHttpRequest();
   let storyData;

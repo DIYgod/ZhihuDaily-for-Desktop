@@ -1,7 +1,9 @@
-import Index from './index/index';
-import Story from './story/story';
+import {
+    Index,
+    Story
+} from './controllers';
 
-module.exports = {
-  '/': Index,
-  '/story/:storyId': Story
+export default {
+    '/': Index,
+    '/story/:storyId': Story
 };

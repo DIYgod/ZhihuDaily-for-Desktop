@@ -1,6 +1,6 @@
 // TODO: need to be refactored
 
-module.exports = () => {
+export default () => {
   document.getElementsByClassName('container')[0].innerHTML = '';
 
   // 解析日期
