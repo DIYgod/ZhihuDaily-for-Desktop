@@ -178,7 +178,7 @@ module.exports = {
     // Description: extract all compiled css into file (*.css)
     //
     // See: https://github.com/webpack/extract-text-webpack-plugin
-    new ExtractTextPlugin('[name]-[chunkhash].css', {allChunks: true})
+    new ExtractTextPlugin('[name].css', {allChunks: true})
 
   ],
 
