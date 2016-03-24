@@ -1,10 +1,47 @@
 # ZhihuDaily for Desktop
 
-**A ZhihuDaily client on Mac OS X, Windows and Linux. Build with [Electron](https://github.com/atom/electron).**
+## About
 
-*ZhihuDaily for Desktop* is released by this open source project. It should be noted that this is a community release and not an official ZhihuDaily client release.
+A ZhihuDaily desktop application for Mac OS X, Windows and Linux. Powered by [Electron](https://github.com/atom/electron).
 
-This app is still under development. Mainly tested on OS X, but should work on Windows and Linux.
+**NOTE:** This is a **community** release, not official.
+
+**NOTE:** This app is still under **development**.
+
+## Supported Platforms
+
+* OS X (mainly tested)
+* Linux (x86/x86_64) (partly tested)
+* Windows (32/64 bit) (should work)
+
+## Installation
+
+    # Clone the project via `git`
+    $ git clone https://github.com/DIYgod/ZhihuDaily-for-Desktop.git
+    
+    # or directly download from
+    # https://github.com/DIYgod/ZhihuDaily-for-Desktop/releases
+    
+    # switch to server directory, and build scripts
+    $ cd ZhihuDaily-for-Desktop/server
+    $ npm i
+    
+    # for development use
+    $ npm run build
+    
+    # otherwise
+    $ npm run build:prod
+    
+    # switch back to project root path, start our app
+    $ cd ..
+    $ npm i
+    $ npm start
+
+## Contribution
+
+Ask questions via: https://github.com/DIYgod/ZhihuDaily-for-Desktop/issues
+
+Share your code via: https://github.com/DIYgod/ZhihuDaily-for-Desktop/pulls
 
 ## LICENSE
 
