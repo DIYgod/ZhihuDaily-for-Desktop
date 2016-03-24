@@ -37,6 +37,7 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
-    "director": "^1.2.8"
+    "director": "^1.2.8",
+    "font-awesome": "^4.5.0"
   }
 }
