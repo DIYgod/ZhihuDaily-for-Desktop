@@ -1,4 +1,4 @@
-import { Router } from 'director';
+import {Router} from 'director';
 import routes from './routes';
 
 // TODO: better import css
