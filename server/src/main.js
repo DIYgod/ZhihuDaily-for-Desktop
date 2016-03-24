@@ -16,9 +16,6 @@ document.getElementsByClassName('control-button')[1].addEventListener('click', (
     window.history.forward();
 });
 
-// TODO: deprecate global vars
-window.globalData = {};
-
 document.addEventListener('DOMContentLoaded', () => {
     router.init('/');
 });

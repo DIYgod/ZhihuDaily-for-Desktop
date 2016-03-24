@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 
+import {MemoryStorage} from '../../utils/storage';
+
+const storage = MemoryStorage.instance();
+
 // TODO: need to be refactored
 
 export default () => {
+
     document.getElementsByClassName('container')[0].innerHTML = '';
 
     // 解析日期
@@ -92,14 +97,18 @@ export default () => {
 
     // 保存已加载的文章列表
     const saveNews = () => {
-        window.globalData.indexDate = indexDate;
-        window.globalData.newsHTML = document.getElementsByClassName('container')[0].innerHTML;
+        storage.put('news', {
+            indexDate,
+            newsHTML: document.getElementsByClassName('container')[0].innerHTML
+        });
     };
 
     // 优先恢复已保存的文章列表
-    if (window.globalData.indexDate && window.globalData.newsHTML) {
-        indexDate = window.globalData.indexDate;
-        document.getElementsByClassName('container')[0].innerHTML = window.globalData.newsHTML;
+    const news = storage.get('news');
+
+    if (news && news.indexDate && news.newsHTML) {
+        indexDate = news.indexDate;
+        document.getElementsByClassName('container')[0].innerHTML = news.newsHTML;
     }
     else {
         getNews();
